@@ -1,5 +1,13 @@
-abstract class Exception {}
+abstract class Exception {
+  final String message;
 
-class HiveException extends Exception {}
+  Exception({required this.message});
+}
 
-class DataSourceException extends Exception {}
+class SignInException extends Exception {
+  SignInException({required super.message});
+}
+
+class AuthenticationException extends Exception {
+  AuthenticationException({required super.message});
+}

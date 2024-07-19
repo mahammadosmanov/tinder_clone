@@ -6,7 +6,9 @@ import 'package:go_router/go_router.dart';
 import 'package:tinder_clone/core/constants/color.dart';
 import 'package:tinder_clone/core/constants/icon.dart';
 import 'package:tinder_clone/core/constants/style.dart';
+import 'package:tinder_clone/core/helper/locator.dart';
 import 'package:tinder_clone/core/router/route_constants.dart';
+import 'package:tinder_clone/features/store/data/datasources/authentication_datasource.dart';
 import 'package:tinder_clone/features/store/presentation/pages/login/bloc/login_bloc.dart';
 import 'package:tinder_clone/features/store/presentation/pages/splash/bloc/splash_bloc.dart';
 
@@ -54,7 +56,14 @@ class LoginView extends StatelessWidget {
                   ),
                   16.verticalSpace,
                   _buildLoginButton(
-                    () {},
+                    () {
+                      context.read<LoginBloc>().add(
+                            const SignUpEvent(),
+                          );
+                      locator
+                          .get<AuthenticationDatasource>()
+                          .signInWithGoogle();
+                    },
                   ), //TODO add login functionality
                   76.verticalSpace,
                 ],
@@ -83,6 +92,7 @@ class LoginView extends StatelessWidget {
                   height: 35.55.h,
                   width: 30.28.w,
                 ),
+                4.horizontalSpace,
                 Image.asset(
                   LoginIcons.tinderText,
                   height: 35.55.h,
@@ -91,22 +101,6 @@ class LoginView extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
-            width: 161.w,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                SizedBox(
-                  width: 30.w,
-                  height: 20.h,
-                  child: Text(
-                    "pets",
-                    style: WhiteText.smallBold,
-                  ),
-                ),
-              ],
-            ),
-          )
         ],
       ),
     );

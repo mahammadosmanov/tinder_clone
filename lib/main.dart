@@ -5,13 +5,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tinder_clone/core/constants/color.dart';
 import 'package:tinder_clone/core/helper/locator.dart';
 import 'package:tinder_clone/core/router/route_configuration.dart';
-import 'package:tinder_clone/features/store/data/datasources/local_datasource.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   setupGetIt();
-  await locator.get<LocalDataSource>().setup();
 
   runApp(
     EasyLocalization(

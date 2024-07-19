@@ -1,9 +1,9 @@
-abstract class Failure {}
+abstract class Failure {
+  final String message;
 
-class AuthenticationFailure extends Failure {}
+  Failure({required this.message});
+}
 
-class ProductFailure extends Failure {}
-
-class ProfileFailure extends Failure {}
-
-class LanguageFailure extends Failure {}
+class AuthenticationFailure extends Failure {
+  AuthenticationFailure({required super.message});
+}
